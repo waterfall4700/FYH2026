@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fare Dodgers Host</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body { overflow: auto; }
+    .host { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+    .top { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+    @media (max-width: 680px) { .top { grid-template-columns: 1fr; } }
+    .qr { background: #fff; padding: 10px; border-radius: 4px; }
+    .qr img { width: 100%; display: block; }
+    .url { font-size: 14px; word-break: break-all; margin-top: 10px; }
+    .controls { display: flex; gap: 8px; margin: 20px 0 8px; }
+    .controls button { padding: 10px 18px; }
+    .controls .secondary { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+    #status { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    #status b { color: var(--fg); font-weight: 600; }
+    section.block { margin-top: 40px; }
+    #players { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+    #lock { position: static; padding: 80px 20px; }
+  </style>
+</head>
+<body>
+  <div id="lock" class="screen hidden">
+    <div class="panel">
+      <h1>Host key needed</h1>
+      <p class="muted">Open the host link printed in the terminal. It ends with <code>?key=…</code></p>
+    </div>
+  </div>
+
+  <div id="app" class="host hidden">
+    <div class="top">
+      <div>
+        <div class="qr"><img src="/api/qr.svg" alt="QR code to join"></div>
+        <p id="url" class="url"></p>
+      </div>
+      <div>
+        <h1>Fare Dodgers</h1>
+        <p id="status"></p>
+        <div class="controls">
+          <button id="start">Start round</button>
+          <button id="stop" class="secondary">Stop</button>
+        </div>
+        <p id="msg" class="error"></p>
+      </div>
+    </div>
+
+    <section id="results" class="block hidden">
+      <h1 id="resTitle"></h1>
+      <div class="boards">
+        <div><h2>Fare dodgers</h2><div id="pacBoard"></div></div>
+        <div><h2>Inspectors</h2><div id="ghostBoard"></div></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Players <span id="count"></span></h2>
+      <div id="players"></div>
+    </section>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="draw.js"></script>
+  <script src="host.js"></script>
+</body>
+</html>

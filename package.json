@@ -1,0 +1,22 @@
+{
+  "name": "fare-dodgers",
+  "version": "0.1.0",
+  "description": "Massively multiplayer London-themed Pac-Man for the KCL hackathon",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "bots": "node scripts/bots.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.4"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.4"
+  }
+}
